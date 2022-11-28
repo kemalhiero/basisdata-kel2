@@ -18,33 +18,33 @@
         <ul class="menu">
             <li class="sidebar-title">Menu</li>
 
-            <li class="sidebar-item active">
+            <li class="sidebar-item <?= $this->renderSection('data_barang_active') ?>">
             <a href="/" class="sidebar-link">
                 <i class="bi bi-grid-fill"></i>
-                <span>Dashboard</span>
+                <span>Data Barang</span>
             </a>
             </li>
 
-            <li class="sidebar-item">
-            <a href="#" class="sidebar-link">
+            <li class="sidebar-item <?= $this->renderSection('customer_active') ?>">
+            <a href="/customer" class="sidebar-link">
                 <i class="bi bi-stack"></i>
-                <span>Menu 1</span>
+                <span>Customer</span>
             </a>
             </li>
 
-            <li class="sidebar-item">
-            <a href="#" class="sidebar-link">
+            <li class="sidebar-item <?= $this->renderSection('pembayaran_active') ?>">
+            <a href="/pembayaran" class="sidebar-link">
                 <i class="bi bi-collection-fill"></i>
-                <span>Menu 2</span>
+                <span>Pembayaran</span>
             </a>
             </li>
 
-            <li class="sidebar-item">
+            <!-- <li class="sidebar-item">
             <a href="#" class="sidebar-link">
                 <i class="bi bi-grid-1x2-fill"></i>
                 <span>Menu 3</span>
             </a>
-            </li>
+            </li> -->
 
 
         </ul>

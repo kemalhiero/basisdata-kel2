@@ -33,7 +33,7 @@
               Log in with your data that you entered during registration.
             </p> -->
 
-            <form action="index.html">
+            <form action="/">
               <div class="form-group position-relative has-icon-left mb-4">
                 <input
                   type="text"
@@ -59,12 +59,6 @@
                 Log in
               </button>
             </form>
-            <div class="text-center mt-5 text-lg fs-4">
-              <p class="text-gray-600">
-                Don't have an account?
-                <a href="auth-register.html" class="font-bold">Sign up</a>.
-              </p>
-            </div>
           </div>
         </div>
         <div class="col-lg-7 d-none d-lg-block">

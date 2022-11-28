@@ -7,6 +7,10 @@
 
     <link rel="stylesheet" href="assets/css/main/app.css" />
 
+    <link rel="stylesheet" href="assets/extensions/simple-datatables/style.css"/>
+    <link rel="stylesheet" href="assets/css/pages/simple-datatables.css" />
+    <link rel="stylesheet" href="assets/extensions/choices.js/public/assets/styles/choices.css"/>
+
     <link
       rel="shortcut icon"
       href="assets/images/logo/favicon.svg"
@@ -41,5 +45,12 @@
     </div>
     <script src="assets/js/bootstrap.js"></script>
     <script src="assets/js/app.js"></script>
+
+    <script src="assets/extensions/simple-datatables/umd/simple-datatables.js"></script>
+    <script src="assets/js/pages/simple-datatables.js"></script>
+
+    <script src="assets/extensions/choices.js/public/assets/scripts/choices.js"></script>
+    <script src="assets/js/pages/form-element-select.js"></script>
+
   </body>
 </html>
