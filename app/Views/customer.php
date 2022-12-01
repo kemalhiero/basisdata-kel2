@@ -6,6 +6,13 @@ active
 
 <?= $this->section('konten') ?>
 
+<?php if (session()->getFlashdata('pesan')): ?>
+    <div class="alert alert-success alert-dismissible show fade">
+        <?= session()->getFlashdata('pesan'); ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php endif; ?>
+
 <div class="page-heading">
     <div class="page-title">
         <div class="row">

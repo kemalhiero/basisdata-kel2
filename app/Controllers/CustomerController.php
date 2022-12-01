@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Models\CustomerModel;
 
-class Customer extends BaseController
+class CustomerController extends BaseController
 {
     protected $model;
     public function __construct()
@@ -29,14 +29,14 @@ class Customer extends BaseController
             'no_hp' => $this->request->getVar('no_hp')
         ]);
 
-        // session()->setFlashdata('pesan', 'Data berhasil ditambahkan');
+        session()->setFlashdata('pesan', 'Data berhasil ditambahkan');
         return redirect()->to(base_url('/customer'));
     }
     
     public function delete($id)
     {
         $this->model->delete($id);
-        // session()->setFlashdata('pesan', 'Data berhasil dihapus');
+        session()->setFlashdata('pesan', 'Data berhasil dihapus');
         return redirect()->to(base_url('/customer'));
     }
 

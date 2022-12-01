@@ -35,14 +35,14 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Barang::index');
+$routes->get('/', 'BarangController::index');
 $routes->get('/login', 'Home::login');
 
-$routes->get('/customer', 'Customer::index');
-$routes->post('/tambah-customer', 'Customer::store');
-$routes->delete('/hapus-customer/(:num)', 'Customer::delete/$1');
+$routes->get('/customer', 'CustomerController::index');
+$routes->post('/tambah-customer', 'CustomerController::store');
+$routes->delete('/hapus-customer/(:num)', 'CustomerController::delete/$1');
 
-$routes->get('/pembayaran', 'Pembayaran::index');
+$routes->get('/pembayaran', 'PembayaranController::index');
 
 /*
  * --------------------------------------------------------------------

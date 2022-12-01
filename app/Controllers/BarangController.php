@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Models\CustomerModel;
 
-class Barang extends BaseController
+class BarangController extends BaseController
 {
     protected $modelcustomer;
     public function __construct()

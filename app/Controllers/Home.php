@@ -9,9 +9,5 @@ class Home extends BaseController
         return view('login');
     }
 
-    public function barang()
-    {
-        return view('barang');
-    }
 
 }

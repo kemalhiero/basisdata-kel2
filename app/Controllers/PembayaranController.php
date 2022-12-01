@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-class Pembayaran extends BaseController
+class PembayaranController extends BaseController
 {
     public function index()
     {
