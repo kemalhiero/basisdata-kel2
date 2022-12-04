@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\CustomerModel;
+use CodeIgniter\Validation\StrictRules\Rules;
 
 class CustomerController extends BaseController
 {
@@ -16,12 +17,40 @@ class CustomerController extends BaseController
     {
         $data = $this->model->findAll();
         $fetcheddata['items'] = $data;
+        $fetcheddata['validasi'] = \Config\Services::validation();
         // dd($data);
         return view('customer', $fetcheddata);
     }
 
     public function store()
     {
+
+        if (!$this->validate([
+            'nama' => [
+                'rules' => 'required|string',
+                'errors' => [
+                    'required' => '{field} harus diisi',
+                    'string' => '{field} harus berupa string',
+                ]
+            ],
+            'alamat' => [
+                'rules' => 'required|string',
+                'errors' => [
+                    'required' => '{field} harus diisi',
+                    'string' => '{field} harus berupa string',
+                ]
+            ],
+            'no_hp' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => '{field} harus diisi',
+                    'numeric' => '{field} harus berupa angka',
+                ]
+            ],
+        ])) {
+            $validasi = \Config\Services::validation();
+            return redirect()->to(base_url('/customer'))->withInput()->with('validasi',$validasi);
+        }
 
         $this->model->save([
             'nama' => $this->request->getVar('nama'),

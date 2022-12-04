@@ -17,6 +17,13 @@
         <div class="sidebar-menu">
         <ul class="menu">
             <li class="sidebar-title">Menu</li>
+            
+            <li class="sidebar-item <?= $this->renderSection('pengecekan_active') ?>">
+            <a href="#" class="sidebar-link">
+                <i class="bi bi-grid-1x2-fill"></i>
+                <span>Pengecekan</span>
+            </a>
+            </li>
 
             <li class="sidebar-item <?= $this->renderSection('data_barang_active') ?>">
             <a href="/" class="sidebar-link">
@@ -38,13 +45,13 @@
                 <span>Pembayaran</span>
             </a>
             </li>
-
-            <!-- <li class="sidebar-item">
-            <a href="#" class="sidebar-link">
-                <i class="bi bi-grid-1x2-fill"></i>
-                <span>Menu 3</span>
-            </a>
-            </li> -->
+            
+            <li class="sidebar-item <?= $this->renderSection('teknisi_active') ?>">
+                <a href="#" class="sidebar-link">
+                    <i class="bi bi-hexagon-fill"></i>
+                    <span>Teknisi</span>
+                </a>
+            </li>
 
 
         </ul>

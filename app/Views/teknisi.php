@@ -1,6 +1,6 @@
 <?= $this->extend('template') ?>
 
-<?= $this->section('customer_active') ?>
+<?= $this->section('teknisi_active') ?>
 active
 <?= $this->endSection() ?>
 
@@ -9,13 +9,6 @@ active
 <?php if (session()->getFlashdata('pesan')): ?>
     <div class="alert alert-success alert-dismissible show fade">
         <?= session()->getFlashdata('pesan'); ?>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-<?php endif; ?>
-
-<?php if ($validasi->hasError('nama')||$validasi->hasError('alamat')||$validasi->hasError('no_hp')): ?>
-    <div class="alert alert-danger alert-dismissible show fade">
-        <?= $validasi->listErrors() ?>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 <?php endif; ?>
@@ -218,15 +211,15 @@ active
                     <div class="modal-body">
                         <label>Nama: </label>
                         <div class="form-group">
-                        <input type="text" placeholder="nama" name="nama" class="form-control" value="<?= old('nama'); ?>" required/>
+                        <input type="text" placeholder="nama" name="nama" class="form-control" required/>
                         </div>
                         <label>Alamat: </label>
                         <div class="form-group">
-                        <input type="text" placeholder="alamat" name="alamat" class="form-control" value="<?= old('alamat'); ?>" required/>
+                        <input type="text" placeholder="alamat" name="alamat" class="form-control" required/>
                         </div>
                         <label>No HP: </label>
                         <div class="form-group">
-                            <input type="number"placeholder="nomor hp" name="no_hp" class="form-control" value="<?= old('no_hp'); ?>" required/>
+                            <input type="number"placeholder="nomor hp" name="no_hp" class="form-control" required/>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -234,7 +227,7 @@ active
                             <i class="bx bx-x d-block d-sm-none"></i>
                         <span class="d-none d-sm-block">Tutup</span>
                         </button>
-                        <button type="submit" class="btn btn-primary ml-1">
+                        <button type="submit" class="btn btn-primary ml-1" data-bs-dismiss="modal">
                             <i class="bx bx-check d-block d-sm-none"></i>
                         <span class="d-none d-sm-block">Tambahkan</span>
                         </button>

@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class CustomerModel extends Model
 {
     protected $table      = 'customer';
-    protected $primaryKey = 'id_pelanggan';
+    protected $primaryKey = 'id';
 
     // protected $useAutoIncrement = true;
 
@@ -16,9 +16,9 @@ class CustomerModel extends Model
 
     protected $allowedFields = ['nama', 'no_hp', 'alamat'];
 
-    // protected $useTimestamps = false;
-    // protected $createdField  = 'created_at';
-    // protected $updatedField  = 'updated_at';
+    protected $useTimestamps = true;
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
     // protected $deletedField  = 'deleted_at';
 
     // protected $validationRules    = [];

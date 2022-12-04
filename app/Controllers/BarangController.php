@@ -14,8 +14,9 @@ class BarangController extends BaseController
 
     public function index()
     {
-        $data = $this->modelcustomer->findColumn('nama');
-        $datacunsomer['items'] = $data;
+        $nama = $this->modelcustomer->findColumn('nama');
+        // dd($data);
+        $datacunsomer['items'] = $nama;
         return view('barang', $datacunsomer);
     }
 
