@@ -13,7 +13,7 @@ active
     </div>
 <?php endif; ?>
 
-<?php if ($validasi->hasError('nama')||$validasi->hasError('alamat')||$validasi->hasError('no_hp')): ?>
+<?php if ($validasi->hasError('kode')||$validasi->hasError('nama')||$validasi->hasError('alamat')||$validasi->hasError('no_hp')): ?>
     <div class="alert alert-danger alert-dismissible show fade">
         <?= $validasi->listErrors() ?>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -47,7 +47,7 @@ active
             <table class="table table-striped" id="table1">
                 <thead>
                 <tr>
-                    <th>#</th>
+                    <th>ID</th>
                     <th>Nama</th>
                     <th>Alamat</th>
                     <th>No HP</th>
@@ -55,10 +55,9 @@ active
                 </tr>
                 </thead>
                 <tbody>
-                    <?php $i=1 ?>
                     <?php foreach($items as $d): ?>
                 <tr>
-                    <td><?= $i++; ?></td>
+                    <td><?= esc($d['kode']); ?></td>
                     <td><?= esc($d['nama']); ?></td>
                     <td><?= esc($d['alamat']); ?></td>
                     <td><?= esc($d['no_hp']); ?></td>
@@ -88,19 +87,21 @@ active
                                     <i data-feather="x"></i>
                                 </button>
                                 </div>
-                                <form action="#">
+                                <form action="/edit-customer/<?= esc($d['id']); ?>" method="POST">
+                                <?php csrf_field() ?>
                                 <div class="modal-body">
+                                    <input type="hidden" name="id" value="<?= esc($d['id']); ?>">
                                     <label>Nama: </label>
                                     <div class="form-group">
-                                    <input type="text" placeholder="nama" class="form-control" value="<?= esc($d['nama']); ?>"/>
+                                    <input type="text" placeholder="nama" class="form-control" name="nama" required value="<?= (old('nama'))? old('nama') : esc($d['nama']); ?>"/>
                                     </div>
                                     <label>Alamat: </label>
                                     <div class="form-group">
-                                    <input type="text" placeholder="alamat" class="form-control" value="<?= esc($d['alamat']); ?>"/>
+                                    <input type="text" placeholder="alamat" class="form-control" name="alamat" required value="<?= (old('alamat'))? old('alamat') : esc($d['alamat']); ?>"/>
                                     </div>
                                     <label>No HP: </label>
                                     <div class="form-group">
-                                    <input type="number"placeholder="nomor hp" class="form-control" value="<?= esc($d['no_hp']); ?>"/>
+                                    <input type="number"placeholder="nomor hp" class="form-control" name="no_hp" required value="<?= (old('no_hp'))? old('no_hp') : esc($d['no_hp']); ?>"/>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -108,7 +109,7 @@ active
                                         <i class="bx bx-x d-block d-sm-none"></i>
                                     <span class="d-none d-sm-block">Tutup</span>
                                     </button>
-                                    <button type="button" class="btn btn-warning ml-1" data-bs-dismiss="modal">
+                                    <button type="submit" class="btn btn-warning ml-1">
                                         <i class="bx bx-check d-block d-sm-none"></i>
                                     <span class="d-none d-sm-block">Edit</span>
                                     </button>
@@ -167,7 +168,6 @@ active
                                 <button
                                     type="submit"
                                     class="btn btn-danger ml-1"
-                                    data-bs-dismiss="modal"
                                 >
                                     <i
                                     class="bx bx-check d-block d-sm-none"
@@ -216,6 +216,10 @@ active
                 <form action="/tambah-customer" method="POST">
                 <?= csrf_field(); ?>
                     <div class="modal-body">
+                        <label>ID: </label>
+                        <div class="form-group">
+                        <input type="number" placeholder="id" name="kode" class="form-control" value="<?= old('kode'); ?>" required/>
+                        </div>
                         <label>Nama: </label>
                         <div class="form-group">
                         <input type="text" placeholder="nama" name="nama" class="form-control" value="<?= old('nama'); ?>" required/>

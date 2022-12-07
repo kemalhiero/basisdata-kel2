@@ -11,9 +11,14 @@ class Customer extends Migration
         $this->forge->addField([
             'id' => [
                 'type'           => 'BIGINT',
-                'constraint'     => 5,
+                'constraint'     => 20,
                 'unsigned'       => true,
                 'auto_increment' => true,
+            ],
+            'kode' => [
+                'type'           => 'BIGINT',
+                'constraint'     => 20,
+                'unsigned'       => true,
             ],
             'nama' => [
                 'type'       => 'VARCHAR',

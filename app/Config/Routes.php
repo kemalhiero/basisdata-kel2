@@ -35,14 +35,28 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'BarangController::index');
 $routes->get('/login', 'Home::login');
+
+$routes->get('/barang', 'BarangController::index');
+$routes->post('/tambah-barang', 'BarangController::store');
+$routes->delete('/hapus-barang/(:num)', 'BarangController::delete/$1');
 
 $routes->get('/customer', 'CustomerController::index');
 $routes->post('/tambah-customer', 'CustomerController::store');
 $routes->delete('/hapus-customer/(:num)', 'CustomerController::delete/$1');
+$routes->post('/edit-customer/(:num)', 'CustomerController::update/$1');
 
 $routes->get('/pembayaran', 'PembayaranController::index');
+
+$routes->get('/teknisi', 'TeknisiController::index');
+$routes->post('/tambah-teknisi', 'TeknisiController::store');
+$routes->delete('/hapus-teknisi/(:num)', 'TeknisiController::delete/$1');
+$routes->post('/edit-teknisi/(:num)', 'TeknisiController::update/$1');
+
+$routes->get('/pengecekan', 'PengecekanController::index');
+$routes->get('/tambah-pengecekan', 'PengecekanController::create');
+$routes->get('/detail-pengecekan', 'PengecekanController::show');
+$routes->get('/edit-pengecekan', 'PengecekanController::edit');
 
 /*
  * --------------------------------------------------------------------

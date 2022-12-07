@@ -19,14 +19,14 @@
             <li class="sidebar-title">Menu</li>
             
             <li class="sidebar-item <?= $this->renderSection('pengecekan_active') ?>">
-            <a href="#" class="sidebar-link">
+            <a href="/pengecekan" class="sidebar-link">
                 <i class="bi bi-grid-1x2-fill"></i>
                 <span>Pengecekan</span>
             </a>
             </li>
 
             <li class="sidebar-item <?= $this->renderSection('data_barang_active') ?>">
-            <a href="/" class="sidebar-link">
+            <a href="/barang" class="sidebar-link">
                 <i class="bi bi-grid-fill"></i>
                 <span>Data Barang</span>
             </a>
@@ -38,16 +38,9 @@
                 <span>Customer</span>
             </a>
             </li>
-
-            <li class="sidebar-item <?= $this->renderSection('pembayaran_active') ?>">
-            <a href="/pembayaran" class="sidebar-link">
-                <i class="bi bi-collection-fill"></i>
-                <span>Pembayaran</span>
-            </a>
-            </li>
             
             <li class="sidebar-item <?= $this->renderSection('teknisi_active') ?>">
-                <a href="#" class="sidebar-link">
+                <a href="/teknisi" class="sidebar-link">
                     <i class="bi bi-hexagon-fill"></i>
                     <span>Teknisi</span>
                 </a>

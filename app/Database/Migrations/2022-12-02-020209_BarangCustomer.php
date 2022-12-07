@@ -11,9 +11,14 @@ class BarangCustomer extends Migration
         $this->forge->addField([
             'id' => [
                 'type'           => 'BIGINT',
-                'constraint'     => 5,
+                'constraint'     => 20,
                 'unsigned'       => true,
                 'auto_increment' => true,
+            ],
+            'kode_barang' => [
+                'type'           => 'BIGINT',
+                'constraint'     => 20,
+                'unsigned'       => true,
             ],
             'nama_barang' => [
                 'type'       => 'VARCHAR',

@@ -10,11 +10,16 @@ class Pengecekan extends Migration
     public function up()
     {
         $this->forge->addField([
-            'no_pengecekan' => [
+            'id' => [
                 'type'           => 'BIGINT',
-                'constraint'     => 5,
+                'constraint'     => 20,
                 'unsigned'       => true,
                 'auto_increment' => true,
+            ],
+            'kode_pengecekan' => [
+                'type'           => 'BIGINT',
+                'constraint'     => 20,
+                'unsigned'       => true,
             ],
             'id_teknisi' => [
                 'type'           => 'BIGINT',
@@ -47,7 +52,7 @@ class Pengecekan extends Migration
             ],
         ]);
         // $this->db->disableForeignKeyChecks();
-        $this->forge->addPrimaryKey('no_pengecekan');
+        $this->forge->addPrimaryKey('id');
         // $this->forge->addForeignKey('id_teknisi', 'teknisi', 'id', 'CASCADE', 'CASCADE');
         // $this->forge->addForeignKey('id_customer', 'customer', 'id');
         $this->forge->createTable('pengecekan');

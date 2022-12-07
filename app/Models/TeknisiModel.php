@@ -6,15 +6,15 @@ use CodeIgniter\Model;
 
 class TeknisiModel extends Model
 {
-    protected $DBGroup          = 'default';
+    // protected $DBGroup          = 'default';
     protected $table            = 'teknisi';
     protected $primaryKey       = 'id';
-    protected $useAutoIncrement = true;
-    protected $insertID         = 0;
-    protected $returnType       = 'array';
-    protected $useSoftDeletes   = false;
-    protected $protectFields    = true;
-    protected $allowedFields    = ['nama', 'alamat', 'no_hp'];
+    // protected $useAutoIncrement = true;
+    // protected $insertID         = 0;
+    // protected $returnType       = 'array';
+    // protected $useSoftDeletes   = false;
+    // protected $protectFields    = true;
+    protected $allowedFields    = ['kode_teknisi','nama', 'alamat', 'no_hp'];
 
     // Dates
     protected $useTimestamps = true;

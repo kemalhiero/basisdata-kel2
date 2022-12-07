@@ -6,6 +6,20 @@ active
 
 <?= $this->section('konten') ?>
 
+<?php if (session()->getFlashdata('pesan')): ?>
+    <div class="alert alert-success alert-dismissible show fade">
+        <?= session()->getFlashdata('pesan'); ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php endif; ?>
+
+<?php if ($validasi->hasError('kode_barang')||$validasi->hasError('nama_barang')): ?>
+    <div class="alert alert-danger alert-dismissible show fade">
+        <?= $validasi->listErrors() ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php endif; ?>
+
 <div class="page-heading">
     <div class="page-title">
         <div class="row">
@@ -33,30 +47,133 @@ active
         <table class="table table-striped" id="table1">
                   <thead>
                     <tr>
+                      <th>Kode Barang</th>
                       <th>Nama Barang</th>
-                      <th>Tanggal</th>
-                      <th>Pemilik</th>
-                      <th>Status</th>
                       <th>Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
+                  <?php foreach($items as $d): ?>
                     <tr>
-                        <td>Kulkas 2 Pintu</td>
-                        <td>26/11/2022 17.20</td>
-                        <td>Graiden</td>
+                        <td><?= esc($d['kode_barang']); ?></td>
+                        <td><?= esc($d['nama_barang']); ?></td>
                         <td>
-                            <span class="badge bg-warning">Sedang Proses</span>
-                        </td>
-                        <td>
-                        <button type="button" class="btn icon btn-info" title="Detail" data-bs-toggle="modal" data-bs-target="#modalDetailBarang">
-                            <i data-feather="info"></i></button>
                         <button type="button" class="btn icon btn-warning" title="Edit" data-bs-toggle="modal" data-bs-target="#modalEditBarang">
                             <i data-feather="edit"></i></button>
-                        <button type="button" class="btn icon btn-danger" title="Hapus" data-bs-toggle="modal" data-bs-target="#modalHapusBarang">
+
+                            <!--Modal Form Edit Data -->
+                            <div class="modal fade text-left" id="modalEditBarang" tabindex="-1"
+                                role="dialog"
+                                aria-labelledby="myModalLabel33"
+                                aria-hidden="true">
+                                <div
+                                class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+                                role="document"
+                                >
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h4 class="modal-title" id="myModalLabel33">
+                                    Form Edit Barang
+                                    </h4>
+                                    <button
+                                        type="button"
+                                        class="close"
+                                        data-bs-dismiss="modal"
+                                        aria-label="Close"
+                                    >
+                                        <i data-feather="x"></i>
+                                    </button>
+                                    </div>
+                                    <form action="/edit-barang/<?= esc($d['id']); ?>" method="POST">
+                                    <?php csrf_field() ?>
+                                    <div class="modal-body">
+                                        <label>ID Barang: </label>
+                                        <div class="form-group">
+                                        <input type="text" placeholder="nama" name="kode_barang" class="form-control" value="<?= (old('kode_barang'))? old('kode_barang') : esc($d['kode_barang']); ?>"/>
+                                        </div>
+                                        <label>Nama Barang: </label>
+                                        <div class="form-group">
+                                        <input type="text" placeholder="nama" name="nama_barang" class="form-control" value="<?= (old('nama_barang'))? old('nama_barang') : esc($d['nama_barang']); ?>"/>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal" >
+                                            <i class="bx bx-x d-block d-sm-none"></i>
+                                        <span class="d-none d-sm-block">Tutup</span>
+                                        </button>
+                                        <button type="submit" class="btn btn-warning ml-1">
+                                            <i class="bx bx-check d-block d-sm-none"></i>
+                                        <span class="d-none d-sm-block">Edit</span>
+                                        </button>
+                                    </div>
+                                    </form>
+                                </div>
+                                </div>
+                            </div>
+
+                        <button type="button" class="btn icon btn-danger" title="Hapus" data-bs-toggle="modal" data-bs-target="#modalHapusBarang<?= esc($d['id']); ?>">
                             <i data-feather="trash"></i></button>
+
+                            <!--Danger theme Modal -->
+                            <div class="modal fade text-left" id="modalHapusBarang<?= esc($d['id']); ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel120" aria-hidden="true">
+                                <div
+                                class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+                                role="document"
+                                >
+                                <div class="modal-content">
+                                    <div class="modal-header bg-danger">
+                                    <h5
+                                        class="modal-title white"
+                                        id="myModalLabel120"
+                                    >
+                                        Hapus Data Barang
+                                    </h5>
+                                    <button
+                                        type="button"
+                                        class="close"
+                                        data-bs-dismiss="modal"
+                                        aria-label="Close"
+                                    >
+                                        <i data-feather="x"></i>
+                                    </button>
+                                    </div>
+                                    <div class="modal-body">
+                                    Anda yakin ingin menghapus data barang ini?
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button
+                                        type="button"
+                                        class="btn btn-light-secondary"
+                                        data-bs-dismiss="modal"
+                                    >
+                                        <i class="bx bx-x d-block d-sm-none"></i>
+                                        <span class="d-none d-sm-block"
+                                        >Tutup</span
+                                        >
+                                    </button>
+                                    <form action="/hapus-barang/<?= esc($d['id']); ?>" method="post">
+                                    <?php csrf_field() ?>
+                                    <input type="hidden" name="_method" value="DELETE">
+                                        <button
+                                            type="submit"
+                                            class="btn btn-danger ml-1"
+                                        >
+                                            <i
+                                            class="bx bx-check d-block d-sm-none"
+                                            ></i>
+                                            <span class="d-none d-sm-block"
+                                            >Hapus</span
+                                            >
+                                        </button>
+                                    </form>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+
                         </td>
                     </tr>
+                    <?php endforeach; ?>
                   </tbody>
                 </table>
         </div>
@@ -68,7 +185,7 @@ active
             aria-labelledby="myModalLabel33"
             aria-hidden="true">
             <div
-            class="modal-dialog modal-dialog-scrollable"
+            class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
             role="document"
             >
             <div class="modal-content">
@@ -85,26 +202,16 @@ active
                     <i data-feather="x"></i>
                 </button>
                 </div>
-                <form action="#">
+                <form action="/tambah-barang" method="POST">
+                <?= csrf_field(); ?>
                 <div class="modal-body">
+                    <label>Kode Barang: </label>
+                    <div class="form-group">
+                    <input type="text" placeholder="kode" name="kode_barang" required class="form-control"/>
+                    </div>
                     <label>Nama Barang: </label>
                     <div class="form-group">
-                    <input type="text" placeholder="nama" class="form-control"/>
-                    </div>
-                    <label>Pemilik: </label>
-                    <div class="form-group">
-                        <select class="choices form-select">
-                        <?php foreach($items as $d): ?>
-                            <option value="<?= esc($d); ?>"><?= esc($d); ?></option>
-                        <?php endforeach; ?>
-                        </select>
-                    </div>
-                    <label>Deskripsi: </label>
-                    <div class="form-group">
-                    <textarea
-                        class="form-control"
-                        id="exampleFormControlTextarea1"
-                        rows="3"></textarea>
+                    <input type="text" placeholder="nama" name="nama_barang" required class="form-control"/>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -112,176 +219,12 @@ active
                         <i class="bx bx-x d-block d-sm-none"></i>
                     <span class="d-none d-sm-block">Tutup</span>
                     </button>
-                    <button type="button" class="btn btn-primary ml-1" data-bs-dismiss="modal">
+                    <button type="submit" class="btn btn-primary ml-1">
                         <i class="bx bx-check d-block d-sm-none"></i>
                     <span class="d-none d-sm-block">Tambahkan</span>
                     </button>
                 </div>
                 </form>
-            </div>
-            </div>
-        </div>
-
-
-        <!--Modal Form Edit Data -->
-        <div class="modal fade text-left" id="modalEditBarang" tabindex="-1"
-            role="dialog"
-            aria-labelledby="myModalLabel33"
-            aria-hidden="true">
-            <div
-            class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-            role="document"
-            >
-            <div class="modal-content">
-                <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel33">
-                   Form Edit Barang
-                </h4>
-                <button
-                    type="button"
-                    class="close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                >
-                    <i data-feather="x"></i>
-                </button>
-                </div>
-                <form action="#">
-                <div class="modal-body">
-                    <label>Nama: </label>
-                    <div class="form-group">
-                    <input type="text" placeholder="nama" class="form-control"/>
-                    </div>
-                    <label>Pemilik: </label>
-                    <div class="form-group">
-                    <select class="choices form-select">
-                        <?php foreach($items as $d): ?>
-                            <option value="<?= esc($d); ?>"><?= esc($d); ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                    </div>
-                    <label>Status: </label>
-                    <div class="form-group">
-                    <select class="form-select">
-                            <option value="Selesai">Selesai</option>
-                            <option value="Sedang Proses" selected>Sedang Proses</option>
-                            <option value="Batal">Batal</option>
-                    </select>
-                    </div>
-                    <label>Deskripsi: </label>
-                    <div class="form-group">
-                        <input type="text"placeholder="deskripsi" class="form-control"/>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal" >
-                        <i class="bx bx-x d-block d-sm-none"></i>
-                    <span class="d-none d-sm-block">Tutup</span>
-                    </button>
-                    <button type="button" class="btn btn-warning ml-1" data-bs-dismiss="modal">
-                        <i class="bx bx-check d-block d-sm-none"></i>
-                    <span class="d-none d-sm-block">Edit</span>
-                    </button>
-                </div>
-                </form>
-            </div>
-            </div>
-        </div>
-
-
-        <!--Modal Detail Data -->
-        <div class="modal fade text-left" id="modalDetailBarang" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33"aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel33">
-                   Detail Barang
-                </h4>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <i data-feather="x"></i>
-                </button>
-                </div>
-                <form action="#">
-                <div class="modal-body">
-                    <label>Nama: </label>
-                    <div class="form-group">
-                        <input type="text" class="form-control" readonly value=" data nama"/>
-                    </div>
-                    <label>Tanggal: </label>
-                    <div class="form-group">
-                        <input type="text" class="form-control" readonly value=" data tanggal"/>
-                    </div>
-                    <label>Pemilik: </label>
-                    <div class="form-group">
-                        <input  type="text" class="form-control" readonly value=" data pemilik"/>
-                    </div>
-                    <label>Status: </label>
-                    <div class="form-group">
-                        <input  type="text" class="form-control" readonly value=" data status"/>
-                    </div>
-                    <label>Deskripsi: </label>
-                    <div class="form-group">
-                    <textarea
-                        class="form-control"
-                        id="exampleFormControlTextarea1"
-                        rows="3"></textarea>
-                    </div>
-                </div>
-                </form>
-            </div>
-            </div>
-        </div>
-
-        <!--Danger theme Modal -->
-        <div class="modal fade text-left" id="modalHapusBarang" tabindex="-1" role="dialog" aria-labelledby="myModalLabel120" aria-hidden="true">
-            <div
-            class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-            role="document"
-            >
-            <div class="modal-content">
-                <div class="modal-header bg-danger">
-                <h5
-                    class="modal-title white"
-                    id="myModalLabel120"
-                >
-                    Hapus Data Barang
-                </h5>
-                <button
-                    type="button"
-                    class="close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                >
-                    <i data-feather="x"></i>
-                </button>
-                </div>
-                <div class="modal-body">
-                Anda yakin ingin menghapus data barang ini?
-                </div>
-                <div class="modal-footer">
-                <button
-                    type="button"
-                    class="btn btn-light-secondary"
-                    data-bs-dismiss="modal"
-                >
-                    <i class="bx bx-x d-block d-sm-none"></i>
-                    <span class="d-none d-sm-block"
-                    >Tutup</span
-                    >
-                </button>
-                <button
-                    type="button"
-                    class="btn btn-danger ml-1"
-                    data-bs-dismiss="modal"
-                >
-                    <i
-                    class="bx bx-check d-block d-sm-none"
-                    ></i>
-                    <span class="d-none d-sm-block"
-                    >Hapus</span
-                    >
-                </button>
-                </div>
             </div>
             </div>
         </div>

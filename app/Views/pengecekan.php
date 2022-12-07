@@ -6,20 +6,13 @@ active
 
 <?= $this->section('konten') ?>
 
-<?php if (session()->getFlashdata('pesan')): ?>
-    <div class="alert alert-success alert-dismissible show fade">
-        <?= session()->getFlashdata('pesan'); ?>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-<?php endif; ?>
-
 <div class="page-heading">
     <div class="page-title">
         <div class="row">
         <div class="col-12 col-md-6 order-md-1 order-last">
-            <h3>Data Konsumen</h3>
+            <h3>Data pengecekan barang konsumen</h3>
             <p class="text-subtitle text-muted">
-            Data Konsumen akan ditampilkan disini
+            Pengecekan Barang yang diperbaiki akan ditampilkan disini
             </p>
         </div>
         </div>
@@ -27,218 +20,35 @@ active
     <section class="section">
         <div class="card">
         <div class="card-header float-start">
-            <button
-                type="button"
-                class="btn btn-primary"
-                data-bs-toggle="modal"
-                data-bs-target="#modalTambahBarang"
-            >
-                Tambah Pelanggan
-            </button>
+            <a href="/tambah-pengecekan" class="btn icon icon-left btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="white" width="30"><!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM232 344V280H168c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H280v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/></svg>    
+            Tambah Pengecekan</a>
         </div>
         <div class="card-body">
-            <table class="table table-striped" id="table1">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Nama</th>
-                    <th>Alamat</th>
-                    <th>No HP</th>
-                    <th>Aksi</th>
-                </tr>
-                </thead>
-                <tbody>
-                    <?php $i=1 ?>
-                    <?php foreach($items as $d): ?>
-                <tr>
-                    <td><?= $i++; ?></td>
-                    <td><?= esc($d['nama']); ?></td>
-                    <td><?= esc($d['alamat']); ?></td>
-                    <td><?= esc($d['no_hp']); ?></td>
-                    <td>
-                    <button type="button" class="btn icon btn-warning" title="Edit" data-bs-toggle="modal" data-bs-target="#modalEditCustomer<?= esc($d['id']); ?>">
-                        <i data-feather="edit"></i></button>
-                        <!--Modal Form Edit Data -->
-                        <div class="modal fade text-left" id="modalEditCustomer<?= esc($d['id']); ?>" tabindex="-1"
-                            role="dialog"
-                            aria-labelledby="myModalLabel33"
-                            aria-hidden="true">
-                            <div
-                            class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-                            role="document"
-                            >
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                <h4 class="modal-title" id="myModalLabel33">
-                                Form Edit Data Konsumen
-                                </h4>
-                                <button
-                                    type="button"
-                                    class="close"
-                                    data-bs-dismiss="modal"
-                                    aria-label="Close"
-                                >
-                                    <i data-feather="x"></i>
-                                </button>
-                                </div>
-                                <form action="#">
-                                <div class="modal-body">
-                                    <label>Nama: </label>
-                                    <div class="form-group">
-                                    <input type="text" placeholder="nama" class="form-control" value="<?= esc($d['nama']); ?>"/>
-                                    </div>
-                                    <label>Alamat: </label>
-                                    <div class="form-group">
-                                    <input type="text" placeholder="alamat" class="form-control" value="<?= esc($d['alamat']); ?>"/>
-                                    </div>
-                                    <label>No HP: </label>
-                                    <div class="form-group">
-                                    <input type="number"placeholder="nomor hp" class="form-control" value="<?= esc($d['no_hp']); ?>"/>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal" >
-                                        <i class="bx bx-x d-block d-sm-none"></i>
-                                    <span class="d-none d-sm-block">Tutup</span>
-                                    </button>
-                                    <button type="button" class="btn btn-warning ml-1" data-bs-dismiss="modal">
-                                        <i class="bx bx-check d-block d-sm-none"></i>
-                                    <span class="d-none d-sm-block">Edit</span>
-                                    </button>
-                                </div>
-                                </form>
-                            </div>
-                            </div>
-                        </div>
-
-                    <button type="button" class="btn icon btn-danger" title="Hapus" data-bs-toggle="modal" data-bs-target="#modalHapusCustomer<?= esc($d['id']); ?>">
-                        <i data-feather="trash"></i></button>
-                    <!--Danger theme Modal -->
-                    <div class="modal fade text-left" id="modalHapusCustomer<?= esc($d['id']); ?>" tabindex="-1"
-                    role="dialog"
-                    aria-labelledby="myModalLabel120"
-                    aria-hidden="true"
-                    >
-                        <div
-                        class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-                        role="document"
-                        >
-                        <div class="modal-content">
-                            <div class="modal-header bg-danger">
-                            <h5
-                                class="modal-title white"
-                                id="myModalLabel120"
-                            >
-                                Hapus Data Konsumen
-                            </h5>
-                            <button
-                                type="button"
-                                class="close"
-                                data-bs-dismiss="modal"
-                                aria-label="Close"
-                            >
-                                <i data-feather="x"></i>
-                            </button>
-                            </div>
-                            <div class="modal-body">
-                            Anda yakin ingin menghapus data konsumen ini?
-                            </div>
-                            <div class="modal-footer">
-                            <button
-                                type="button"
-                                class="btn btn-light-secondary"
-                                data-bs-dismiss="modal"
-                            >
-                                <i class="bx bx-x d-block d-sm-none"></i>
-                                <span class="d-none d-sm-block"
-                                >Tutup</span
-                                >
-                            </button>
-                            <form action="/hapus-customer/<?= esc($d['id']); ?>" method="post">
-                            <?php csrf_field() ?>
-                            <input type="hidden" name="_method" value="DELETE">
-                                <button
-                                    type="submit"
-                                    class="btn btn-danger ml-1"
-                                    data-bs-dismiss="modal"
-                                >
-                                    <i
-                                    class="bx bx-check d-block d-sm-none"
-                                    ></i>
-                                    <span class="d-none d-sm-block"
-                                    >Hapus</span
-                                    >
-                                </button>
-                            </form>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-
-                    </td>
-                </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+        <table class="table table-striped" id="table1">
+            <thead>
+            <tr>
+                <th>ID Pengecekan</th>
+                <th>Nama Pelanggan</th>
+                <th>Nama Teknisi</th>
+                <th>Tanggal</th>
+                <th>Aksi</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1313</td>
+                <td>pelanggannnnnn</td>
+                <td>teknisi1</td>
+                <td>04/12/2022</td>
+                <td>
+                    <a href="/detail-pengecekan" class="btn icon icon-left btn-info" title="detail pengecekan barang"><i data-feather="info"></i> Detail</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
         </div>
         </div>
-
-        <!--Modal Form Tambah Data -->
-        <div class="modal fade text-left" id="modalTambahBarang" tabindex="-1"
-            role="dialog"
-            aria-labelledby="myModalLabel33"
-            aria-hidden="true">
-            <div
-            class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-            role="document"
-            >
-            <div class="modal-content">
-                <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel33">
-                   Form Tambah Pelanggan
-                </h4>
-                <button
-                    type="button"
-                    class="close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                >
-                    <i data-feather="x"></i>
-                </button>
-                </div>
-                <form action="/tambah-customer" method="POST">
-                <?= csrf_field(); ?>
-                    <div class="modal-body">
-                        <label>Nama: </label>
-                        <div class="form-group">
-                        <input type="text" placeholder="nama" name="nama" class="form-control" required/>
-                        </div>
-                        <label>Alamat: </label>
-                        <div class="form-group">
-                        <input type="text" placeholder="alamat" name="alamat" class="form-control" required/>
-                        </div>
-                        <label>No HP: </label>
-                        <div class="form-group">
-                            <input type="number"placeholder="nomor hp" name="no_hp" class="form-control" required/>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal" >
-                            <i class="bx bx-x d-block d-sm-none"></i>
-                        <span class="d-none d-sm-block">Tutup</span>
-                        </button>
-                        <button type="submit" class="btn btn-primary ml-1" data-bs-dismiss="modal">
-                            <i class="bx bx-check d-block d-sm-none"></i>
-                        <span class="d-none d-sm-block">Tambahkan</span>
-                        </button>
-                    </div>
-                </form>
-            </div>
-            </div>
-        </div>
-
-
-
 
     </section>
 </div>

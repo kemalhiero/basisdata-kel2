@@ -15,6 +15,11 @@ class Teknisi extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
+            'kode_teknisi' => [
+                'type'           => 'BIGINT',
+                'constraint'     => 20,
+                'unsigned'       => true,
+            ],
             'nama' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '100',
