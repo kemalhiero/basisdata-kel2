@@ -8,13 +8,13 @@ class TeknisiModel extends Model
 {
     // protected $DBGroup          = 'default';
     protected $table            = 'teknisi';
-    protected $primaryKey       = 'id';
-    // protected $useAutoIncrement = true;
+    protected $primaryKey       = 'id_teknisi';
+    protected $useAutoIncrement = false;
     // protected $insertID         = 0;
-    // protected $returnType       = 'array';
-    // protected $useSoftDeletes   = false;
-    // protected $protectFields    = true;
-    protected $allowedFields    = ['kode_teknisi','nama', 'alamat', 'no_hp'];
+    protected $returnType       = 'array';
+    protected $useSoftDeletes   = false;
+    protected $protectFields    = true;
+    protected $allowedFields    = ['id_teknisi','nama', 'alamat', 'no_hp'];
 
     // Dates
     protected $useTimestamps = true;

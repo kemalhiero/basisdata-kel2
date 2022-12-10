@@ -28,23 +28,26 @@ active
         <table class="table table-striped" id="table1">
             <thead>
             <tr>
-                <th>ID Pengecekan</th>
+                <th>Kode Pengecekan</th>
                 <th>Nama Pelanggan</th>
                 <th>Nama Teknisi</th>
-                <th>Tanggal</th>
+                <th>Waktu</th>
                 <th>Aksi</th>
             </tr>
             </thead>
             <tbody>
+            <?php foreach($items as $d): ?>
             <tr>
-                <td>1313</td>
-                <td>pelanggannnnnn</td>
-                <td>teknisi1</td>
-                <td>04/12/2022</td>
+                <td><?= esc($d['kode_pengecekan']); ?></td>
+                <td><?= esc($d['nama_customer']); ?></td>
+                <td><?= esc($d['nama_teknisi']); ?></td>
+                <td><?= esc($d['tanggal']); ?></td>
                 <td>
-                    <a href="/detail-pengecekan" class="btn icon icon-left btn-info" title="detail pengecekan barang"><i data-feather="info"></i> Detail</a>
+                    <!-- <a href="<?php echo base_url('detail-pengecekan/'. esc($d['kode_pengecekan'])) ?>" class="btn icon icon-left btn-info" title="detail pengecekan barang"><i data-feather="info"></i> Detail</a> -->
+                    <a href="<?php echo base_url('PengecekanController/show/' . esc($d['kode_pengecekan'])) ?>" class="btn icon icon-left btn-info" title="detail pengecekan barang"><i data-feather="info"></i> Detail</a>
                 </td>
             </tr>
+            <?php endforeach; ?>
             </tbody>
         </table>
         </div>

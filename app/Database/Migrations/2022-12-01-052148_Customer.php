@@ -9,15 +9,9 @@ class Customer extends Migration
     public function up()
     {
         $this->forge->addField([
-            'id' => [
-                'type'           => 'BIGINT',
-                'constraint'     => 20,
-                'unsigned'       => true,
-                'auto_increment' => true,
-            ],
-            'kode' => [
-                'type'           => 'BIGINT',
-                'constraint'     => 20,
+            'id_customer' => [
+                'type'           => 'INT',
+                'constraint'     => 10,
                 'unsigned'       => true,
             ],
             'nama' => [
@@ -30,7 +24,7 @@ class Customer extends Migration
             ],
             'alamat' => [
                 'type' => 'VARCHAR',
-                'constraint' => '200',
+                'constraint' => '100',
                 'null' => true,
             ],
             'created_at' => [
@@ -42,7 +36,7 @@ class Customer extends Migration
                 'null'       => true,
             ],
         ]);
-        $this->forge->addPrimaryKey('id');
+        $this->forge->addKey('id_customer', true, true);
         $this->forge->createTable('customer');
     }
 

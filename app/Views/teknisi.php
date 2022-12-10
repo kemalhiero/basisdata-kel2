@@ -13,7 +13,7 @@ active
     </div>
 <?php endif; ?>
 
-<?php if ($validasi->hasError('kode_teknisi')||$validasi->hasError('nama')||$validasi->hasError('alamat')||$validasi->hasError('no_hp')): ?>
+<?php if ($validasi->hasError('id_teknisi')||$validasi->hasError('nama')||$validasi->hasError('alamat')||$validasi->hasError('no_hp')): ?>
     <div class="alert alert-danger alert-dismissible show fade">
         <?= $validasi->listErrors() ?>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -58,16 +58,16 @@ active
                   <?php $i=1 ?>
                     <?php foreach($items as $d): ?>
                     <tr>
-                        <td><?= esc($d['kode_teknisi']); ?></td>
+                        <td><?= esc($d['id_teknisi']); ?></td>
                         <td><?= esc($d['nama']); ?></td>
                         <td><?= esc($d['alamat']); ?></td>
                         <td><?= esc($d['no_hp']); ?></td>
                         <td>
-                        <button type="button" class="btn icon btn-warning" title="Edit" data-bs-toggle="modal" data-bs-target="#modalEditTeknisi<?= esc($d['id']); ?>">
+                        <button type="button" class="btn icon btn-warning" title="Edit" data-bs-toggle="modal" data-bs-target="#modalEditTeknisi<?= esc($d['id_teknisi']); ?>">
                             <i data-feather="edit"></i></button>
 
                             <!--Modal Form Edit Data -->
-                            <div class="modal fade text-left" id="modalEditTeknisi<?= esc($d['id']); ?>" tabindex="-1"
+                            <div class="modal fade text-left" id="modalEditTeknisi<?= esc($d['id_teknisi']); ?>" tabindex="-1"
                                 role="dialog"
                                 aria-labelledby="myModalLabel33"
                                 aria-hidden="true">
@@ -89,12 +89,12 @@ active
                                         <i data-feather="x"></i>
                                     </button>
                                     </div>
-                                    <form action="/edit-teknisi/<?= esc($d['id']); ?>" method="POST">
+                                    <form action="/edit-teknisi/<?= esc($d['id_teknisi']); ?>" method="POST">
                                     <?php csrf_field() ?>
                                     <div class="modal-body">
                                         <label>ID: </label>
                                         <div class="form-group">
-                                        <input type="number" placeholder="id" name="id" class="form-control" required value="<?= (old('kode_teknisi'))? old('kode_teknisi') : esc($d['kode_teknisi']); ?>"/>
+                                        <input type="number" placeholder="id" name="id_teknisi" class="form-control" required value="<?= (old('id_teknisi'))? old('id_teknisi') : esc($d['id_teknisi']); ?>" min="1"/>
                                         </div>
                                         <label>Nama: </label>
                                         <div class="form-group">
@@ -106,7 +106,7 @@ active
                                         </div>
                                         <label>No HP: </label>
                                         <div class="form-group">
-                                        <input type="text" placeholder="nomor hp" name="no_hp" class="form-control" required value="<?= (old('no_hp'))? old('no_hp') : esc($d['no_hp']); ?>"/>
+                                        <input type="number" placeholder="nomor hp" name="no_hp" class="form-control" required value="<?= (old('no_hp'))? old('no_hp') : esc($d['no_hp']); ?>" min="1"/>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -124,11 +124,11 @@ active
                                 </div>
                             </div>
 
-                        <button type="button" class="btn icon btn-danger" title="Hapus" data-bs-toggle="modal" data-bs-target="#modalHapusTeknisi">
+                        <button type="button" class="btn icon btn-danger" title="Hapus" data-bs-toggle="modal" data-bs-target="#modalHapusTeknisi<?= esc($d['id_teknisi']); ?>">
                             <i data-feather="trash"></i></button>
 
                             <!--Danger theme Modal -->
-                            <div class="modal fade text-left" id="modalHapusTeknisi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel120" aria-hidden="true">
+                            <div class="modal fade text-left" id="modalHapusTeknisi<?= esc($d['id_teknisi']); ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel120" aria-hidden="true">
                                 <div
                                 class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
                                 role="document"
@@ -164,7 +164,7 @@ active
                                         >Tutup</span
                                         >
                                     </button>
-                                    <form action="/hapus-teknisi/<?= esc($d['id']); ?>" method="post">
+                                    <form action="/hapus-teknisi/<?= esc($d['id_teknisi']); ?>" method="post">
                                     <?php csrf_field() ?>
                                     <input type="hidden" name="_method" value="DELETE">
                                         <button
@@ -220,7 +220,7 @@ active
                 <div class="modal-body">
                     <label>ID: </label>
                     <div class="form-group">
-                    <input type="number" placeholder="id" name="kode_teknisi" class="form-control" required value="<?= old('id'); ?>"/>
+                    <input type="number" placeholder="id teknisi" name="id_teknisi" class="form-control" required value="<?= old('id_teknisi'); ?>" min="1"/>
                     </div>
                     <label>Nama: </label>
                     <div class="form-group">
@@ -232,7 +232,7 @@ active
                     </div>
                     <label>No HP: </label>
                     <div class="form-group">
-                    <input type="number" placeholder="nomor hp" name="no_hp" class="form-control" required value="<?= old('no_hp'); ?>"/>
+                    <input type="number" placeholder="nomor hp" name="no_hp" class="form-control" required value="<?= old('no_hp'); ?>" min="1"/>
                     </div>
                 </div>
                 <div class="modal-footer">

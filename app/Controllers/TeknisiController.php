@@ -25,12 +25,11 @@ class TeknisiController extends BaseController
     public function store()
     {
         if (!$this->validate([
-            'kode_teknisi' => [
-                'rules' => 'required|is_unique[teknisi.kode_teknisi]',
+            'id_teknisi' => [
+                'rules' => 'required|is_unique[teknisi.id_teknisi]',
                 'errors' => [
-                    'is_unique' => '{field} sudah ada',
+                    'is_unique' => 'ID Teknisi ini sudah ada',
                     'required' => '{field} harus diisi',
-                    'string' => '{field} harus berupa string',
                 ]
             ],
             'nama' => [
@@ -60,7 +59,7 @@ class TeknisiController extends BaseController
         }
 
         $this->model->save([
-            'kode_teknisi' => $this->request->getVar('kode_teknisi'),
+            'id_teknisi' => $this->request->getVar('id_teknisi'),
             'nama' => $this->request->getVar('nama'),
             'alamat' => $this->request->getVar('alamat'),
             'no_hp' => $this->request->getVar('no_hp'),
@@ -80,10 +79,10 @@ class TeknisiController extends BaseController
     public function update($id)
     {
         if (!$this->validate([
-            'kode_teknisi' => [
+            'id_teknisi' => [
                 'rules' => 'required',
                 'errors' => [
-                    'is_unique' => '{field} sudah ada',
+                    // 'is_unique' => 'ID Teknisi ini sudah ada',
                     'required' => '{field} harus diisi',
                     'string' => '{field} harus berupa string',
                 ]
@@ -116,7 +115,7 @@ class TeknisiController extends BaseController
 
         $this->model->update($id,
         [
-            'kode_teknisi' => $this->request->getVar('kode_teknisi'),
+            'id_teknisi' => $this->request->getVar('id_teknisi'),
             'nama' => $this->request->getVar('nama'),
             'alamat' => $this->request->getVar('alamat'),
             'no_hp' => $this->request->getVar('no_hp')

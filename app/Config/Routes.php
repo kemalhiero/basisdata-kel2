@@ -17,7 +17,7 @@ if (is_file(SYSTEMPATH . 'Config/Routes.php')) {
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Home');
+$routes->setDefaultController('PengecekanController');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -25,7 +25,7 @@ $routes->set404Override();
 // where controller filters or CSRF protection are bypassed.
 // If you don't want to define all routes, please use the Auto Routing (Improved).
 // Set `$autoRoutesImproved` to true in `app/Config/Feature.php` and set the following to true.
-// $routes->setAutoRoute(false);
+$routes->setAutoRoute(true);
 
 /*
  * --------------------------------------------------------------------
@@ -39,14 +39,11 @@ $routes->get('/login', 'Home::login');
 
 $routes->get('/barang', 'BarangController::index');
 $routes->post('/tambah-barang', 'BarangController::store');
-$routes->delete('/hapus-barang/(:num)', 'BarangController::delete/$1');
 
 $routes->get('/customer', 'CustomerController::index');
 $routes->post('/tambah-customer', 'CustomerController::store');
 $routes->delete('/hapus-customer/(:num)', 'CustomerController::delete/$1');
 $routes->post('/edit-customer/(:num)', 'CustomerController::update/$1');
-
-$routes->get('/pembayaran', 'PembayaranController::index');
 
 $routes->get('/teknisi', 'TeknisiController::index');
 $routes->post('/tambah-teknisi', 'TeknisiController::store');
@@ -55,8 +52,12 @@ $routes->post('/edit-teknisi/(:num)', 'TeknisiController::update/$1');
 
 $routes->get('/pengecekan', 'PengecekanController::index');
 $routes->get('/tambah-pengecekan', 'PengecekanController::create');
-$routes->get('/detail-pengecekan', 'PengecekanController::show');
+$routes->post('/tambah-pengecekan', 'PengecekanController::store');
+$routes->get('/tambah-barang-pengecekan/(:num)', 'PengecekanController::tambahbarang/$1');
+$routes->post('/tambah-barang-pengecekan', 'PengecekanController::store_tambah_barang');
 $routes->get('/edit-pengecekan', 'PengecekanController::edit');
+$routes->delete('/hapus-barang-pengecekan/(:num)', 'PengecekanController::delete_barang_cek/$1');
+// $routes->get('/detail-pengecekan/(:num)', 'PengecekanController::show/$1');
 
 /*
  * --------------------------------------------------------------------

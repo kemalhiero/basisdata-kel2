@@ -35,7 +35,7 @@
             <li class="sidebar-item <?= $this->renderSection('customer_active') ?>">
             <a href="/customer" class="sidebar-link">
                 <i class="bi bi-stack"></i>
-                <span>Customer</span>
+                <span>Pelanggan</span>
             </a>
             </li>
             

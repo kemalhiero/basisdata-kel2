@@ -9,19 +9,28 @@ class DetailPengecekanBarang extends Migration
     public function up()
     {
         $this->forge->addField([
-            'no_pengecekan' => [
-                'type'           => 'BIGINT',
+            'id' => [
+                'type'           => 'INT',
+                'constraint'     => 10,
+                'unsigned'       => true,
+                'auto_increment' => true,
+            ],
+            'kode_pengecekan' => [
+                'type'           => 'INT',
                 'unsigned'       => true,
             ],
-            'id_barang' => [
-                'type'           => 'BIGINT',
-                'unsigned'       => true,
+            'kode_barang' => [
+                'type'       => 'VARCHAR',
+                'constraint' => '50',
+                'null'       => false,
             ],
-            'deskripsi_kerusakan' => [
+            'keluhan_barang' => [
                 'type'       => 'TEXT'
             ],
             'jumlah' => [
                 'type'       => 'INT',
+                'constraint' => 3,
+                'unsigned'   => true,
             ],
             'created_at' => [
                 'type'       => 'DATETIME',
@@ -32,6 +41,7 @@ class DetailPengecekanBarang extends Migration
                 'null'       => true,
             ],
         ]);
+        $this->forge->addKey('id', true, true);
         $this->forge->addKey('no_pengecekan');
         $this->forge->addKey('id_barang');
         $this->forge->createTable('detail_pengecekan_barang');

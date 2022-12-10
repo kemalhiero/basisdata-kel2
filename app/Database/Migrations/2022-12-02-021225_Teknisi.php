@@ -9,15 +9,9 @@ class Teknisi extends Migration
     public function up()
     {
         $this->forge->addField([
-            'id' => [
-                'type'           => 'BIGINT',
-                'constraint'     => 20,
-                'unsigned'       => true,
-                'auto_increment' => true,
-            ],
-            'kode_teknisi' => [
-                'type'           => 'BIGINT',
-                'constraint'     => 20,
+            'id_teknisi' => [
+                'type'           => 'INT',
+                'constraint'     => 10,
                 'unsigned'       => true,
             ],
             'nama' => [
@@ -26,7 +20,7 @@ class Teknisi extends Migration
             ],
             'alamat' => [
                 'type' => 'VARCHAR',
-                'constraint' => '200',
+                'constraint' => '100',
                 'null' => true,
             ],
             'no_hp' => [
@@ -42,7 +36,7 @@ class Teknisi extends Migration
                 'null'       => true,
             ],
         ]);
-        $this->forge->addPrimaryKey('id');
+        $this->forge->addKey('id_teknisi', true, true);
         $this->forge->createTable('teknisi');
     }
 

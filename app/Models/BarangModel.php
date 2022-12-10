@@ -7,11 +7,11 @@ use CodeIgniter\Model;
 class BarangModel extends Model
 {
     protected $table      = 'barang_customer';
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'kode_barang';
 
-    // protected $useAutoIncrement = true;
+    protected $useAutoIncrement = false;
 
-    // protected $returnType     = 'array';
+    protected $returnType     = 'array';
     // protected $useSoftDeletes = true;
 
     protected $allowedFields = ['kode_barang','nama_barang'];

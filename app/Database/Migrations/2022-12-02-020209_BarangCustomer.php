@@ -9,20 +9,14 @@ class BarangCustomer extends Migration
     public function up()
     {
         $this->forge->addField([
-            'id' => [
-                'type'           => 'BIGINT',
-                'constraint'     => 20,
-                'unsigned'       => true,
-                'auto_increment' => true,
-            ],
             'kode_barang' => [
-                'type'           => 'BIGINT',
-                'constraint'     => 20,
-                'unsigned'       => true,
+                'type'       => 'VARCHAR',
+                'constraint' => '50',
+                'null'       => false,
             ],
             'nama_barang' => [
                 'type'       => 'VARCHAR',
-                'constraint' => '255',
+                'constraint' => '100',
                 'null'       => false,
             ],
             'created_at' => [
@@ -34,7 +28,7 @@ class BarangCustomer extends Migration
                 'null'       => true
             ],
         ]);
-        $this->forge->addPrimaryKey('id');
+        $this->forge->addKey('kode_barang',true,true);
         $this->forge->createTable('barang_customer');
     }
 

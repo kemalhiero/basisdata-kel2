@@ -27,9 +27,9 @@ class BarangController extends BaseController
             'kode_barang' => [
                 'rules' => 'required|string|is_unique[barang_customer.kode_barang]',
                 'errors' => [
-                    'is_unique' => '{field} sudah ada',
-                    'required' => '{field} harus diisi',
-                    'string' => '{field} harus berupa string',
+                    'is_unique' => 'Kode barang ini sudah ada',
+                    'required' => 'Kode barang harus diisi',
+                    'string' => 'Kode barang harus berupa string',
                 ]
             ],
             'nama_barang' => [

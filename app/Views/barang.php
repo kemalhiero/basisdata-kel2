@@ -58,11 +58,11 @@ active
                         <td><?= esc($d['kode_barang']); ?></td>
                         <td><?= esc($d['nama_barang']); ?></td>
                         <td>
-                        <button type="button" class="btn icon btn-warning" title="Edit" data-bs-toggle="modal" data-bs-target="#modalEditBarang">
+                        <button type="button" class="btn icon btn-warning" title="Edit" data-bs-toggle="modal" data-bs-target="#modalEditBarang<?= esc($d['kode_barang']); ?>">
                             <i data-feather="edit"></i></button>
 
                             <!--Modal Form Edit Data -->
-                            <div class="modal fade text-left" id="modalEditBarang" tabindex="-1"
+                            <div class="modal fade text-left" id="modalEditBarang<?= esc($d['kode_barang']); ?>" tabindex="-1"
                                 role="dialog"
                                 aria-labelledby="myModalLabel33"
                                 aria-hidden="true">
@@ -84,10 +84,10 @@ active
                                         <i data-feather="x"></i>
                                     </button>
                                     </div>
-                                    <form action="/edit-barang/<?= esc($d['id']); ?>" method="POST">
+                                    <form action="/BarangController/update/<?= esc($d['kode_barang']); ?>" method="POST">
                                     <?php csrf_field() ?>
                                     <div class="modal-body">
-                                        <label>ID Barang: </label>
+                                        <label>Kode Barang: </label>
                                         <div class="form-group">
                                         <input type="text" placeholder="nama" name="kode_barang" class="form-control" value="<?= (old('kode_barang'))? old('kode_barang') : esc($d['kode_barang']); ?>"/>
                                         </div>
@@ -111,11 +111,11 @@ active
                                 </div>
                             </div>
 
-                        <button type="button" class="btn icon btn-danger" title="Hapus" data-bs-toggle="modal" data-bs-target="#modalHapusBarang<?= esc($d['id']); ?>">
+                        <button type="button" class="btn icon btn-danger" title="Hapus" data-bs-toggle="modal" data-bs-target="#modalHapusBarang<?= esc($d['kode_barang']); ?>">
                             <i data-feather="trash"></i></button>
 
                             <!--Danger theme Modal -->
-                            <div class="modal fade text-left" id="modalHapusBarang<?= esc($d['id']); ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel120" aria-hidden="true">
+                            <div class="modal fade text-left" id="modalHapusBarang<?= esc($d['kode_barang']); ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel120" aria-hidden="true">
                                 <div
                                 class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
                                 role="document"
@@ -151,7 +151,7 @@ active
                                         >Tutup</span
                                         >
                                     </button>
-                                    <form action="/hapus-barang/<?= esc($d['id']); ?>" method="post">
+                                    <form action="/BarangController/delete/<?= esc($d['kode_barang']); ?>" method="post">
                                     <?php csrf_field() ?>
                                     <input type="hidden" name="_method" value="DELETE">
                                         <button

@@ -7,14 +7,14 @@ use CodeIgniter\Model;
 class CustomerModel extends Model
 {
     protected $table      = 'customer';
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'id_customer';
 
-    // protected $useAutoIncrement = true;
+    protected $useAutoIncrement = false;
 
     // protected $returnType     = 'array';
     // protected $useSoftDeletes = true;
 
-    protected $allowedFields = ['kode','nama', 'no_hp', 'alamat'];
+    protected $allowedFields = ['id_customer','nama', 'no_hp', 'alamat'];
 
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';

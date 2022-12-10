@@ -25,12 +25,11 @@ class CustomerController extends BaseController
     public function store()
     {
         if (!$this->validate([
-            'kode' => [
-                'rules' => 'required|string|is_unique[customer.kode]',
+            'id_customer' => [
+                'rules' => 'required|is_unique[customer.id_customer]',
                 'errors' => [
-                    'is_unique' => '{field} sudah ada',
+                    'is_unique' => 'ID Pelanggan ini sudah ada',
                     'required' => '{field} harus diisi',
-                    'string' => '{field} harus berupa string',
                 ]
             ],
             'nama' => [
@@ -60,7 +59,7 @@ class CustomerController extends BaseController
         }
 
         $this->model->save([
-            'kode' => $this->request->getVar('kode'),
+            'id_customer' => $this->request->getVar('id_customer'),
             'nama' => $this->request->getVar('nama'),
             'alamat' => $this->request->getVar('alamat'),
             'no_hp' => $this->request->getVar('no_hp')
@@ -81,6 +80,13 @@ class CustomerController extends BaseController
     {
         
         if (!$this->validate([
+            'id_customer' => [
+                'rules' => 'required',
+                'errors' => [
+                    'is_unique' => 'ID Pelanggan ini sudah ada',
+                    'required' => '{field} harus diisi',
+                ]
+            ],
             'nama' => [
                 'rules' => 'required|string',
                 'errors' => [
@@ -109,6 +115,7 @@ class CustomerController extends BaseController
 
         $this->model->update($id,
         [
+            'id_customer' => $this->request->getVar('id_customer'),
             'nama' => $this->request->getVar('nama'),
             'alamat' => $this->request->getVar('alamat'),
             'no_hp' => $this->request->getVar('no_hp')

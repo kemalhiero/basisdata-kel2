@@ -8,13 +8,13 @@ class PengecekanModel extends Model
 {
     protected $DBGroup          = 'default';
     protected $table            = 'pengecekan';
-    protected $primaryKey       = 'id';
-    protected $useAutoIncrement = true;
-    protected $insertID         = 0;
+    protected $primaryKey       = 'kode_pengecekan';
+    protected $useAutoIncrement = false;
+    // protected $insertID         = 0;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['kode_pengecekan','id_teknisi', 'harga_perbaikan', 'id_customer', 'deskripsi_pengecekan', 'tanggal'];
 
     // Dates
     protected $useTimestamps = true;
