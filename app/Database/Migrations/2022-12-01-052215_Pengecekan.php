@@ -34,7 +34,7 @@ class Pengecekan extends Migration
                 'type'       => 'TEXT',
             ],
             'tanggal' => [
-                'type'       => 'DATE',
+                'type'       => 'DATETIME',
             ],
             'created_at' => [
                 'type'       => 'DATETIME',

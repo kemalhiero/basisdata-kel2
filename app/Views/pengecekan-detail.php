@@ -6,6 +6,20 @@ active
 
 <?= $this->section('konten') ?>
 
+<?php if (session()->getFlashdata('pesan')): ?>
+    <div class="alert alert-success alert-dismissible show fade">
+        <?= session()->getFlashdata('pesan'); ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php endif; ?>
+
+<?php if ($validasi->hasError('harga_perbaikan')||$validasi->hasError('deskripsi_pengecekan')): ?>
+    <div class="alert alert-danger alert-dismissible show fade">
+        <?= $validasi->listErrors() ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php endif; ?>
+
 <div class="page-heading">
     <div class="page-title">
         <div class="row">
@@ -19,8 +33,17 @@ active
     </div>
     <section class="section">
         <div class="card">
-        <div class="card-header float-start">
-            <!-- <h4 class="card-title">Horizontal Form</h4> -->
+        <div class="card-header">
+            <?php if($barang): ?>
+            <button
+                class="btn btn-primary float-end"
+                type="button"
+                data-bs-toggle="modal"
+                data-bs-target="#modalInputHarga"
+            >
+                Input Harga dan Deskripsi
+            </button>
+            <?php endif; ?>
         </div>
         <div class="card-body">
         <form class="form form-horizontal">
@@ -74,21 +97,22 @@ active
                     <label>Harga Perbaikan (Rp)</label>
                 </div>
                 <div class="col-md-8 form-group">
-                    <input value="" placeholder="tambahkan harga"
-                    type="text"
+                    <input readonly type="text" value="<?= esc($cek['harga_perbaikan']); ?>"
                     class="form-control"
-                    name="password"
+                    placeholder="tambahkan harga"
+                    aria-label="Example text with button addon"
+                    aria-describedby="button-addon1"
                     />
                 </div>
                 <div class="col-md-4">
                     <label>Deskripsi Pengecekan</label>
                 </div>
                 <div class="col-md-8 form-group">
-                    <textarea placeholder="tambahkan deskipsi"
+                    <textarea placeholder="tambahkan deskipsi" readonly
                         class="form-control"
                         id="exampleFormControlTextarea1"
-                        rows="3"
-                      ></textarea>
+                        rows="5"
+                      ><?= esc($cek['deskripsi_pengecekan']); ?></textarea>
                 </div>
                 </div>
             </div>
@@ -119,6 +143,66 @@ active
                 <td><?= esc($b['keluhan_barang']); ?></td>
                 <td><?= esc($b['jumlah']); ?></td>
                 <td>
+                    <button type="button" class="btn icon btn-warning" title="Edit" data-bs-toggle="modal" data-bs-target="#modalEditBarang<?= esc($b['id']); ?>">
+                    <i class="bi bi-pencil"></i></button>
+
+                    <!--Modal Form Edit Data -->
+                    <div class="modal fade text-left" id="modalEditBarang<?= esc($b['id']); ?>" tabindex="-1"
+                        role="dialog"
+                        aria-labelledby="myModalLabel33"
+                        aria-hidden="true">
+                        <div
+                        class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+                        role="document"
+                        >
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel33">
+                            Form Edit Barang
+                            </h4>
+                            <button
+                                type="button"
+                                class="close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                            >
+                                <i data-feather="x"></i>
+                            </button>
+                            </div>
+                            <form action="/PengecekanController/update_barang_cek/<?= esc($b['id']); ?>" method="POST">
+                            <?php csrf_field() ?>
+                            <div class="modal-body">
+                                <label>Kode Barang: </label>
+                                <div class="form-group">
+                                <input type="text" name="kode_barang" class="form-control" value="<?= esc($b['kode_barang']); ?>" disabled/>
+                                </div>
+                                <label>Nama Barang: </label>
+                                <div class="form-group">
+                                <input type="text" name="nama_barang" class="form-control" value="<?= esc($b['nama_barang']); ?>" disabled/>
+                                </div>
+                                <label>Keluhan Barang: </label>
+                                <div class="form-group">
+                                <input type="text" placeholder="nama" name="keluhan_barang" class="form-control" value="<?= esc($b['keluhan_barang']); ?>"/>
+                                </div>
+                                <label>Jumlah: </label>
+                                <div class="form-group">
+                                <input type="number" placeholder="nama" name="jumlah" class="form-control" value="<?= esc($b['jumlah']); ?>" min="1"/>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal" >
+                                    <i class="bx bx-x d-block d-sm-none"></i>
+                                <span class="d-none d-sm-block">Tutup</span>
+                                </button>
+                                <button type="submit" class="btn btn-warning ml-1">
+                                    <i class="bx bx-check d-block d-sm-none"></i>
+                                <span class="d-none d-sm-block">Edit</span>
+                                </button>
+                            </div>
+                            </form>
+                        </div>
+                        </div>
+                    </div>
 
                     <button type="button" class="btn icon btn-danger" title="Hapus" data-bs-toggle="modal" data-bs-target="#modalHapusBarang<?= esc($b['id']); ?>">
                             <i class="bi bi-x"></i></button>
@@ -158,7 +242,8 @@ active
                             </div>
                         </div>
                         </div>
-                    </div>
+                    </div>  
+
                 </td>
             </tr>
             <?php endforeach; ?>
@@ -167,6 +252,56 @@ active
 
         </div>
         </div>
+
+        <!--Modal Form Input Harga -->
+        <div class="modal fade text-left" id="modalInputHarga" tabindex="-1"
+            role="dialog"
+            aria-labelledby="myModalLabel33"
+            aria-hidden="true">
+            <div
+            class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+            role="document"
+            >
+            <div class="modal-content">
+                <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel33">
+                Form Input Harga dan Deskripsi
+                </h4>
+                <button
+                    type="button"
+                    class="close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                >
+                    <i data-feather="x"></i>
+                </button>
+                </div>
+                <form action="/PengecekanController/tambah_harga_deskripsi/<?= esc($cek['kode_pengecekan']); ?>" method="POST">
+                <?= csrf_field(); ?>
+                <div class="modal-body">
+                    <label>Harga (Rp)</label>
+                    <div class="form-group">
+                    <input type="number" placeholder="harga perbaikan" name="harga_perbaikan" class="form-control" required value="<?= esc($cek['harga_perbaikan']); ?>" min="0"/>
+                    </div>
+                    <label>Deskripsi </label>
+                    <div class="form-group">
+                    <textarea placeholder="deskipsi perbaikan" class="form-control" name="deskripsi_pengecekan" rows="5" ><?= esc($cek['deskripsi_pengecekan']); ?></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal" >
+                        <i class="bx bx-x d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Tutup</span>
+                    </button>
+                    <button type="submit" class="btn btn-primary ml-1">
+                        <i class="bx bx-check d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Input</span>
+                    </button>
+                </div>
+                </form>
+            </div>
+            </div>
+        </div> 
 
     </section>
 </div>

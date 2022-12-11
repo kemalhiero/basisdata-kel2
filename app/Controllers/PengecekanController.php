@@ -24,6 +24,7 @@ class PengecekanController extends BaseController
         $this->modelBarang = new BarangModel();
         $this->modelTeknisi = new TeknisiModel();
         $this->modelDetailPengecekanBarang = new DetailPengecekanBarangModel();
+        helper('date');
     }
     
     public function index()
@@ -52,10 +53,17 @@ class PengecekanController extends BaseController
     
     public function tambahbarang($kode)
     {
-        $dataBarang = $this->modelBarang->findAll();
+        $ada = $this->modelDetailPengecekanBarang->findAll();
+
+        $dataDetail = $this->modelDetailPengecekanBarang->where('kode_pengecekan',$kode)->findColumn('kode_barang');
+        if ($ada) {
+            $dataBarang = $this->modelBarang->whereNotIn('kode_barang',$dataDetail, false)->findAll();
+        } else {
+            $dataBarang = $this->modelBarang->findAll();
+        }
+        // dd($adangga);
         $fetcheddata['barang'] = $dataBarang;
         $fetcheddata['kode'] = $kode;
-        // dd($fetcheddata);
         return view('pengecekan-tambah-barang', $fetcheddata);
     }
     
@@ -91,6 +99,8 @@ class PengecekanController extends BaseController
             'kode_pengecekan' => $kode_cek,
             'id_teknisi' => $this->request->getVar('id_teknisi'),
             'id_customer' => $this->request->getVar('id_customer'),
+            'tanggal' => date("Y-m-d H:i:s"),
+
         ]);
 
         session()->setFlashdata('pesan', 'Data berhasil ditambahkan');
@@ -103,7 +113,7 @@ class PengecekanController extends BaseController
 
         // data pengecekan
         $builder_cek = $db->table('pengecekan');
-        $builder_cek->select('pengecekan.kode_pengecekan, customer.nama AS nama_customer, teknisi.nama AS nama_teknisi , pengecekan.created_at AS tanggal');
+        $builder_cek->select('pengecekan.*, customer.nama AS nama_customer, teknisi.nama AS nama_teknisi');
         $builder_cek->join('customer', 'customer.id_customer = pengecekan.id_customer');
         $builder_cek->join('teknisi', 'teknisi.id_teknisi = pengecekan.id_teknisi');
         $detail_cek = $builder_cek->getWhere(['kode_pengecekan' => $id])->getResultArray();
@@ -117,7 +127,7 @@ class PengecekanController extends BaseController
         $fetcheddata['barang'] = $barang;
 
 
-        // $fetcheddata['items'] = $this->modelPengecekan->find($id);
+        $fetcheddata['validasi'] = \Config\Services::validation();
         // dd($fetcheddata);
         return view('pengecekan-detail', $fetcheddata);
     }
@@ -140,6 +150,30 @@ class PengecekanController extends BaseController
     {
         $this->modelDetailPengecekanBarang->delete($id);
         session()->setFlashdata('pesan', 'Data berhasil dihapus');
+        return redirect()->back();
+    }
+
+    public function tambah_harga_deskripsi($kode)
+    {
+        $this->modelPengecekan->update($kode,
+        [
+            'harga_perbaikan' => $this->request->getVar('harga_perbaikan'),
+            'deskripsi_pengecekan' => $this->request->getVar('deskripsi_pengecekan'),
+        ]);
+        
+        session()->setFlashdata('pesan', 'Data berhasil ditambahkan');
+        return redirect()->back();
+    }
+
+    public function update_barang_cek($id)
+    {
+        $this->modelDetailPengecekanBarang->update($id,
+        [
+            'keluhan_barang' => $this->request->getVar('keluhan_barang'),
+            'jumlah' => $this->request->getVar('jumlah'),
+        ]);
+        
+        session()->setFlashdata('pesan', 'Data berhasil diubah');
         return redirect()->back();
     }
     
