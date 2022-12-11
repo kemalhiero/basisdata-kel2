@@ -281,7 +281,7 @@ active
                 <div class="modal-body">
                     <label>Harga (Rp)</label>
                     <div class="form-group">
-                    <input type="number" placeholder="harga perbaikan" name="harga_perbaikan" class="form-control" required value="<?= esc($cek['harga_perbaikan']); ?>" min="0"/>
+                    <input type="number" placeholder="harga perbaikan" name="harga_perbaikan" class="form-control" required value="<?= esc($cek['harga_perbaikan']); ?>" min="0" maxlength="10"/>
                     </div>
                     <label>Deskripsi </label>
                     <div class="form-group">

@@ -56,8 +56,8 @@ class PengecekanController extends BaseController
         $ada = $this->modelDetailPengecekanBarang->findAll();
 
         $dataDetail = $this->modelDetailPengecekanBarang->where('kode_pengecekan',$kode)->findColumn('kode_barang');
-        if ($ada) {
-            $dataBarang = $this->modelBarang->whereNotIn('kode_barang',$dataDetail, false)->findAll();
+        if ($ada && $dataDetail) {
+            $dataBarang = $this->modelBarang->whereNotIn('kode_barang',$dataDetail, true)->findAll();
         } else {
             $dataBarang = $this->modelBarang->findAll();
         }
@@ -174,6 +174,13 @@ class PengecekanController extends BaseController
         ]);
         
         session()->setFlashdata('pesan', 'Data berhasil diubah');
+        return redirect()->back();
+    }
+
+    public function delete_pengecekan($id)
+    {
+        $this->modelPengecekan->delete($id);
+        session()->setFlashdata('pesan', 'Data berhasil dihapus');
         return redirect()->back();
     }
     

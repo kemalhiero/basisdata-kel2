@@ -42,8 +42,8 @@ class DetailPengecekanBarang extends Migration
             ],
         ]);
         $this->forge->addKey('id', true, true);
-        $this->forge->addKey('no_pengecekan');
-        $this->forge->addKey('id_barang');
+        $this->forge->addKey('kode_pengecekan');
+        $this->forge->addKey('kode_barang');
         $this->forge->createTable('detail_pengecekan_barang');
     }
 

@@ -46,8 +46,8 @@ class Pengecekan extends Migration
             ],
         ]);
         $this->forge->addKey('kode_pengecekan', true, true);
-        // $this->forge->addForeignKey('id_teknisi', 'teknisi', 'id', 'CASCADE', 'CASCADE');
-        // $this->forge->addForeignKey('id_customer', 'customer', 'id');
+        $this->forge->addKey('id_teknisi', false, false);
+        $this->forge->addKey('id_customer', false, false);
         $this->forge->createTable('pengecekan');
     }
 

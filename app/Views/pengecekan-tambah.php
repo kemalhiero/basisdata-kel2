@@ -44,7 +44,7 @@ active
                     <label>ID Pengecekan</label>
                 </div>
                 <div class="col-md-8 form-group">
-                    <input required min="1" autofocus required
+                    <input required min="1" autofocus required maxlength="5"
                     type="number"
                     class="form-control"
                     name="kode_pengecekan"

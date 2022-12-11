@@ -43,8 +43,68 @@ active
                 <td><?= esc($d['nama_teknisi']); ?></td>
                 <td><?= esc($d['tanggal']); ?></td>
                 <td>
-                    <!-- <a href="<?php echo base_url('detail-pengecekan/'. esc($d['kode_pengecekan'])) ?>" class="btn icon icon-left btn-info" title="detail pengecekan barang"><i data-feather="info"></i> Detail</a> -->
-                    <a href="<?php echo base_url('PengecekanController/show/' . esc($d['kode_pengecekan'])) ?>" class="btn icon icon-left btn-info" title="detail pengecekan barang"><i data-feather="info"></i> Detail</a>
+                    <a href="<?php echo base_url('PengecekanController/show/' . esc($d['kode_pengecekan'])) ?>" class="btn icon btn-info" title="Detail pengecekan barang"><i data-feather="info"></i></a>
+
+                    <button type="button" class="btn icon btn-danger" title="Hapus data" data-bs-toggle="modal" data-bs-target="#modalHapusCustomer<?= esc($d['kode_pengecekan']); ?>">
+                        <i data-feather="trash"></i></button>
+                    <!--Danger theme Modal -->
+                    <div class="modal fade text-left" id="modalHapusCustomer<?= esc($d['kode_pengecekan']); ?>" tabindex="-1"
+                    role="dialog"
+                    aria-labelledby="myModalLabel120"
+                    aria-hidden="true"
+                    >
+                        <div
+                        class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+                        role="document"
+                        >
+                        <div class="modal-content">
+                            <div class="modal-header bg-danger">
+                            <h5
+                                class="modal-title white"
+                                id="myModalLabel120"
+                            >
+                                Hapus Data Pengecekan
+                            </h5>
+                            <button
+                                type="button"
+                                class="close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                            >
+                                <i data-feather="x"></i>
+                            </button>
+                            </div>
+                            <div class="modal-body">
+                            Anda yakin ingin menghapus data pengecekan ini?
+                            </div>
+                            <div class="modal-footer">
+                            <button
+                                type="button"
+                                class="btn btn-light-secondary"
+                                data-bs-dismiss="modal"
+                            >
+                                <i class="bx bx-x d-block d-sm-none"></i>
+                                <span class="d-none d-sm-block"
+                                >Tutup</span
+                                >
+                            </button>
+                            <form action="/PengecekanController/delete_pengecekan/<?= esc($d['kode_pengecekan']); ?>" method="post">
+                            <?php csrf_field() ?>
+                            <input type="hidden" name="_method" value="DELETE">
+                                <button
+                                    type="submit"
+                                    class="btn btn-danger ml-1">
+                                    <i class="bx bx-check d-block d-sm-none"></i>
+                                    <span class="d-none d-sm-block"
+                                    >Hapus</span
+                                    >
+                                </button>
+                            </form>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
                 </td>
             </tr>
             <?php endforeach; ?>

@@ -98,15 +98,15 @@ active
                                         </div>
                                         <label>Nama: </label>
                                         <div class="form-group">
-                                        <input type="text" placeholder="nama" name="nama" class="form-control" required value="<?= (old('nama'))? old('nama') : esc($d['nama']); ?>"/>
+                                        <input type="text" placeholder="nama" name="nama" class="form-control" required value="<?= (old('nama'))? old('nama') : esc($d['nama']); ?>" maxlength="50"/>
                                         </div>
                                         <label>Alamat: </label>
                                         <div class="form-group">
-                                        <input type="text" placeholder="alamat" name="alamat" class="form-control" required value="<?= (old('alamat'))? old('alamat') : esc($d['alamat']); ?>"/>
+                                        <input type="text" placeholder="alamat" name="alamat" class="form-control" required value="<?= (old('alamat'))? old('alamat') : esc($d['alamat']); ?>" maxlength="50"/>
                                         </div>
                                         <label>No HP: </label>
                                         <div class="form-group">
-                                        <input type="number" placeholder="nomor hp" name="no_hp" class="form-control" required value="<?= (old('no_hp'))? old('no_hp') : esc($d['no_hp']); ?>" min="1"/>
+                                        <input type="number" placeholder="nomor hp" name="no_hp" class="form-control" required value="<?= (old('no_hp'))? old('no_hp') : esc($d['no_hp']); ?>" min="1" maxlength="15"/>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -220,19 +220,19 @@ active
                 <div class="modal-body">
                     <label>ID: </label>
                     <div class="form-group">
-                    <input type="number" placeholder="id teknisi" name="id_teknisi" class="form-control" required value="<?= old('id_teknisi'); ?>" min="1"/>
+                    <input type="number" placeholder="id teknisi" name="id_teknisi" class="form-control" required value="<?= old('id_teknisi'); ?>" min="1" maxlength="5"/>
                     </div>
                     <label>Nama: </label>
                     <div class="form-group">
-                    <input type="text" placeholder="nama" name="nama" class="form-control" required value="<?= old('nama'); ?>"/>
+                    <input type="text" placeholder="nama" name="nama" class="form-control" required value="<?= old('nama'); ?>" maxlength="50"/>
                     </div>
                     <label>Alamat: </label>
                     <div class="form-group">
-                    <input type="text" placeholder="alamat" name="alamat" class="form-control" required value="<?= old('alamat'); ?>"/>
+                    <input type="text" placeholder="alamat" name="alamat" class="form-control" required value="<?= old('alamat'); ?>" maxlength="50"/>
                     </div>
                     <label>No HP: </label>
                     <div class="form-group">
-                    <input type="number" placeholder="nomor hp" name="no_hp" class="form-control" required value="<?= old('no_hp'); ?>" min="1"/>
+                    <input type="number" placeholder="nomor hp" name="no_hp" class="form-control" required value="<?= old('no_hp'); ?>" min="1" maxlength="15"/>
                     </div>
                 </div>
                 <div class="modal-footer">
